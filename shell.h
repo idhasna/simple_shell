@@ -13,19 +13,20 @@
 #include <string.h>
 #include <sys/wait.h>
 
+extern char **environ
 /**
- * struct listr - A singly linked list .
+ * struct liststr - A singly linked list .
  * @numb: The field of the number .
  * @sttr: The string .
  * @_next: It points to the next node .
  */
 
-typedef struct listr
+typedef struct liststr
 {
 	int numb;
 	char *sttr;
-	struct listr *_next;
-} listr_t;
+	struct liststr *_next;
+} list_t;
 
 /**
  * struct builtin - It contains the builtin string and a related function .
@@ -37,7 +38,7 @@ typedef struct builtin
 {
 	char *name;
 	int (*fnc)(info_t *);
-} builtin_t;
+} builtin_table;
 
 /* interactive.c */
 int _isdelime(char, char *);
@@ -85,35 +86,35 @@ ssize_t _getinput(info_t *);
 void _siginthandler(int);
 
 /* getenviron.c */
-int unset_env(info_t *, char *);
-char **get_env_cpy(info_t *);
-int set_env(info_t *, char *, char *);
+int unset_env(ino_t *, char *);
+char **get_env_cpy(ino_t *);
+int set_env(ino_t *, char *, char *);
 
 /* setinfo.c */
-void _setinfo(info_t *, char **);
-void _clearinfo(info_t *);
-void _freeinfo(info_t *, int);
+void _setinfo(ino_t *, char **);
+void _clearinfo(ino_t *);
+void _freeinfo(ino_t *, int);
 
 /* gethistory.c */
-int list_history(info_t *info, char *buf, int linecount);
-int print_history(info_t *info);
-int _renumbhistory(info_t *info);
-int _readhistory(info_t *info);
-char *_gethistory(info_t *info);
+int list_history(ino_t *ino, char *buf, int linecount);
+int print_history(ino_t *info);
+int _renumbhistory(ino_t *info);
+int _readhistory(ino_t *info);
+char *_gethistory(ino_t *info);
 
 /* nodes.c */
-int _deletenode(list_t **, unsigned int);
-list_t *_addnodeend(list_t **, const char *, int);
-void list_free(list_t **);
-list_t *_addnode(list_t **, const char *, int);
-size_t write_sttr_list(const list_t *);
+int _deletenode(listr_t **, unsigned int);
+list_t *_addnodeend(listr_t **, const char *, int);
+void list_free(listr_t **);
+list_t *_addnode(listr_t **, const char *, int);
+size_t write_sttr_list(const listr_t *);
 
 /* Lists.c */
-list_t *prefix_node(list_t *, char *, char);
-char **conve_list_str(list_t *);
-ssize_t node_index(list_t *, list_t *);
-size_t length_list(const list_t *);
-size_t write_list(const list_t *);
+list_t *prefix_node(listr_t *, char *, char);
+char **conve_list_str(listr_t *);
+ssize_t node_index(listr_t *, listr_t *);
+size_t length_list(const listr_t *);
+size_t write_list(const listr_t *);
 
 /* Memory.c */
 int free_pntr(void **);
@@ -149,54 +150,55 @@ char **split_str(char *, char *);
 
 /* alias.c */
 int rep_vars(info_t *);
-void chain_check(info_t *, char *, size_t *, size_t, size_t);
+void chain_check(ino_t *, char *, size_t *, size_t, size_t);
 int rep_str(char **, char *);
-int _ischain(info_t *, char *, size_t *);
-int rep_als(info_t *);
+int _ischain(ino_t *, char *, size_t *);
+int rep_als(ino_t *);
 
 /**
  * struct passinfo - Got pseudoarguements which are going to get a function,
  * to allow for a single prototype of the function pointer struct .
- * @f_path: The string path for the existing command .
- * @f_name: The file name of the program .
+ * @path: The string path for the existing command .
+ * @name: The file name of the program .
  * @argv: A set of strings derived from arguments .
- * @_environ: A custom modified copy of the environ .
+ * @environ: A custom modified copy of the environ .
  * @arg: A string generated with arguments contained in the getline .
- * @_flinecount: Counting this line of input .
- * @_history: The node of the history .
+ * @linecount_flag: Counting this line of input .
+ * @history: The node of the history .
  * @env: A local copy of environ listed in a linked list .
- * @als: The node of the alias .
- * @change_env: The environ changes .
- * @hist_count: The number of history line numbers .
- * @_errnum: The error code for exit .
- * @fd_read: The field from which input lines are read .
+ * @aliass: The node of the alias .
+ * @env_changed: The environ changes .
+ * @histcount: The number of history line numbers .
+ * @err_num: The error code for exit .
+ * @readfd: The field from which input lines are read .
  * @argc: The argument count .
- * @_linecount: The error count .
- * @_status: The status of the returned last executed command .
- * @comd_buff_t: The command type .
- * @comand_buf: The address of the command buffer .
+ * @line_count: The error count .
+ * @status: The status of the returned last executed command .
+ * @cmd_buf_type: The command type .
+ * @cmd_buf: The address of the command buffer .
  */
 
 typedef struct passinfo
 {
-	char **comd_buff
-	char *f_path;
-	char *f_name;
-	char **argv;
-	char **_environ;
 	char *arg;
-	unsigned int _linecount;
-	list_t *_history;
-	list_t *env;
-	list_t *als;
-	int change_env;
-	int hist_count;
-	int _errnum;
-	int fd_read;
+	char **argv;
+	char *path;
 	int argc;
-	int comd_buff_t;
-	int _flinecount;
-	int _status;
+	unsigned int line_count;
+	int err_num;
+	int linecount_flag;
+	char *fname;
+	list_t *env;
+	list_t *history;
+	list_t *alias;
+	char **environ;
+	int env_changed;
+	int status;
+
+	char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
+	int cmd_buf_type; /* CMD_type ||, &&, ; */
+	int readfd;
+	int histcount;
 } info_t;
 
 #define HIST_FILE "simple_shell_history"
