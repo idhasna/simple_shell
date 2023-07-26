@@ -155,7 +155,7 @@ int _ischain(info_t *, char *, size_t *);
 int rep_als(info_t *);
 
 /**
- * struct _passinfo - Got pseudoarguements which are going to get a function,
+ * struct passinfo - Got pseudoarguements which are going to get a function,
  * to allow for a single prototype of the function pointer struct .
  * @f_path: The string path for the existing command .
  * @f_name: The file name of the program .
@@ -177,7 +177,7 @@ int rep_als(info_t *);
  * @comand_buf: The address of the command buffer .
  */
 
-typedef struct _passinfo
+typedef struct passinfo
 {
 	char **comd_buff
 	char *f_path;
