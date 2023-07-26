@@ -13,7 +13,6 @@ char *str_ch(char *sttr, char charc)
 		if (*sttr == charc)
 			return (sttr);
 	} while (*sttr++ != '\0');
-
 	return (NULL);
 }
 

@@ -11,35 +11,35 @@
 int main(int argc, char **argv)
 {
 	info_t info[] = { INFO_INIT };
-	int fd = 2;
+	int fle_des = 2;
 
 	asm ("mov %1, %0\n\t"
 			"add $3, %0"
-			: "=r" (fd)
-			: "r" (fd));
+			: "=r" (file_des)
+			: "r" (file_des));
 
 	if (argc == 2)
 	{
-		fd = open(argv[1], O_RDONLY);
-		if (fd == -1)
+		file_des = open(argv[1], O_RDONLY);
+		if (file_des == -1)
 		{
 			if (errno == EACCES)
 				exit(126);
 			if (errno == ENOENT)
 			{
-				fprintf(argv[0]);
-				fprintf(": 0: Can't open ");
-				fprintf(argv[1]);
-				_eputchar('\n');
-				_eputchar(BUF_FLUSH);
+				_myeputs(argv[0]);
+				_myeputs(": 0: Can't open ");
+				_myeputs(argv[1]);
+				_myeputchar('\n');
+				_myeputchar(BUF_FLUSH);
 				exit(127);
 			}
 			return (EXIT_FAILURE);
 		}
-		info->readfd = fd;
+		info->fd_read = file_des;
 	}
-	populate_env_list(info);
-	read_history(info);
-	hsh(info, argv);
+	popu_envlist(info);
+	_readhistory(info);
+	shell_loop(info, argv);
 	return (EXIT_SUCCESS);
 }

@@ -19,7 +19,7 @@ int set_env(info_t *info, char *varb, char *strenvalue)
 	if (!varb || !strenvalue)
 		return (0);
 
-	buff = malloc(_strlen(varb) + _strlen(strenvalue) + 2);
+	buff = malloc(length_str(varb) + length_str(strenvalue) + 2);
 	if (!buff)
 		return (1);
 	str_cpy(buff, varb);
@@ -28,19 +28,19 @@ int set_env(info_t *info, char *varb, char *strenvalue)
 	als_node = info->env;
 	while (als_node)
 	{
-		pos = starts_with(als_node->sttr, varb);
+		pos = begins_with(als_node->sttr, varb);
 		if (pos && *pos == '=')
 		{
 			free(als_node->sttr);
 			als_node->sttr = buff;
-			info->env_changed = 1;
+			info->change_env = 1;
 			return (0);
 		}
 		als_node = als_node->next;
 	}
-	add_node_end(&(info->env), buff, 0);
+	_addnodeend(&(info->env), buff, 0);
 	free(buff);
-	info->env_changed = 1;
+	info->change_env = 1;
 	return (0);
 }
 
@@ -63,10 +63,10 @@ int unset_env(info_t *info, char *varb)
 
 	while (als_node)
 	{
-		pos = starts_with(als_node->sttr, varb);
+		pos = begins_with(als_node->sttr, varb);
 		if (pos && *pos == '=')
 		{
-			info->env_changed = delete_node_at_index(&(info->env), index);
+			info->change_env = _delete_node(&(info->env), index);
 			index = 0;
 			als_node = info->env;
 			continue;
@@ -74,7 +74,7 @@ int unset_env(info_t *info, char *varb)
 		als_node = als_node->next;
 		index++;
 	}
-	return (info->env_changed);
+	return (info->change_env);
 }
 
 /**
@@ -86,11 +86,11 @@ int unset_env(info_t *info, char *varb)
 
 char **get_env_cpy(info_t *info)
 {
-	if (!info->environ || info->env_changed)
+	if (!info->_environ || info->change_env)
 	{
-		info->environ = list_to_strings(info->env);
-		info->env_changed = 0;
+		info->_environ = conve_list_str(info->env);
+		info->change_env = 0;
 	}
 
-	return (info->environ);
+	return (info->_environ);
 }

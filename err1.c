@@ -13,11 +13,11 @@ char *conv_number(long int numb, int base, int flg)
 	static char buffer[50];
 	char sign = 0;
 	char *pntr;
-	unsigned long n = numb;
+	unsigned long nb = numb;
 
 	if (!(flg & CONVERT_UNSIGNED) && numb < 0)
 	{
-		n = -numb;
+		nb = -numb;
 		sign = '-';
 
 	}
@@ -27,8 +27,8 @@ char *conv_number(long int numb, int base, int flg)
 
 	do	{
 		*--pntr = array[n % base];
-		n /= base;
-	} while (n != 0);
+		nb /= base;
+	} while (nb != 0);
 
 	if (sign)
 		*--pntr = sign;
@@ -46,7 +46,7 @@ void _printerr(info_t *info, char *err_sttr)
 {
 	_myeputs(info->fname);
 	_myeputs(": ");
-	print_dec(info->line_count, STDERR_FILENO);
+	write_dec(info->_linecount, STDERR_FILENO);
 	_myeputs(": ");
 	_myeputs(info->argv[0]);
 	_myeputs(": ");
@@ -100,15 +100,15 @@ int err_atoi(char *sttr)
 }
 
 /**
- * print_dec - A function that prints a decimal number .
+ * write_dec - A function that prints a decimal number .
  * @number: The number to print .
  * @file_des: The file descriptor to use for writing .
  * Return: To the number of printed characters .
  */
 
-int print_dec(int number, int file_des)
+int write_dec(int number, int file_des)
 {
-	int (*__putchar)(char) = _putchar;
+	int (*__putchar)(char) = _myputchar;
 	int index, count = 0;
 	unsigned int abs_value, latest;
 

@@ -27,8 +27,8 @@ int get_line(info_t *info, char **pntr, size_t *_bufflength)
 		return (-1);
 
 	charc = str_ch(buff + index, '\n');
-	count = charc ? 1 + (unsigned int)(c - buf) : len;
-	new_pos = _realloc(pos, sttr, sttr ? sttr + count : count + 1);
+	count = charc ? 1 + (unsigned int)(charc - buff) : _bufflen;
+	new_pos = _memrealloc(pos, sttr, sttr ? sttr + count : count + 1);
 	if (!new_pos) /* NON6SUCCESS OF MALLOC ! */
 		return (pos ? free(pos), -1 : -1);
 
@@ -56,36 +56,36 @@ int get_line(info_t *info, char **pntr, size_t *_bufflength)
 ssize_t _getinput(info_t *info)
 {
 	static char *buff; /* the ';' command chain buffer */
-	static size_t index, j, _bufflen;
+	static size_t index, x, _bufflen;
 	ssize_t result = 0;
 	char **_buffpos = &(info->arg), *pos;
 
-	_putchar(BUF_FLUSH);
+	_myputchar(BUF_FLUSH);
 	result = _buffinput(info, &buff, &_bufflen);
 	if (result == -1) /* End Of File */
 		return (-1);
 	if (_bufflen) /* In the chain buffer, we've got commands left. */
 	{
-		j = index; /* initialize new iterator into the buf position */
+		x = index; /* initialize new iterator into the buf position */
 		pos = buff + index; /* For return get a pointer */
 
-		check_chain(info, buff, &j, index, _bufflen);
-		while (j < _bufflen)
+		chain_check(info, buff, &x, index, _bufflen);
+		while (x < _bufflen)
 		{
-			if (is_chain(info, buff, &j))
+			if (_ischain(info, buff, &x))
 				break;
-			j++;
+			x++;
 		}
 
-		index = j + 1;
-		if (i >= _bufflen) /* Is the buffer reached its end?*/
+		index = x + 1;
+		if (index >= _bufflen) /* Is the buffer reached its end?*/
 		{
 			index = _bufflen = 0; /* Init length and position */
-			info->cmd_buf_type = CMD_NORM;
+			info->comd_buff_t = CMD_NORM;
 		}
 
 		*_buffpos = pos; /* Return  pointer to existing command position */
-		return (_strlen(pos)); /* Return  length of present command */
+		return (length_str(pos)); /* Return  length of present command */
 	}
 
 	*_buffpos = buff; /* Return buffer from get_line(), if it's not a chain*/
@@ -100,9 +100,9 @@ ssize_t _getinput(info_t *info)
 
 void _siginthandler(__attribute__((unused))int _signumb)
 {
-	_puts("\n");
-	_puts("$ ");
-	_putchar(BUF_FLUSH);
+	_myputs("\n");
+	_myputs("$ ");
+	_myputchar(BUF_FLUSH);
 }
 
 /**
@@ -134,12 +134,12 @@ ssize_t _buffinput(info_t *info, char **buff, size_t *_bufflen)
 				(*buff)[result - 1] = '\0'; /* Delete The trailing newline */
 				result--;
 			}
-			info->linecount_flag = 1;
+			info->_flinecount = 1;
 			rmv_comment(*buff);
-			build_history_list(info, *buff, info->histcount++);
+			list_history(info, *buff, info->hist_count++);
 			{
 				*_bufflen = result;
-				info->cmd_buf = buff;
+				info->comd_buff = buff;
 			}
 		}
 	}
@@ -159,7 +159,7 @@ ssize_t _buffread(info_t *info, char *buff, size_t *index)
 
 	if (*index)
 		return (0);
-	result = read(info->readfd, buff, READ_BUF_SIZE);
+	result = read(info->fd_read, buff, READ_BUF_SIZE);
 	if (result >= 0)
 		*index = result;
 	return (result);

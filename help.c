@@ -15,7 +15,7 @@ int change_cd(info_t *info)
 
 	sttr = getcwd(buffer, 1024);
 	if (!sttr)
-		printf("TODO: >>getcwd non-success msg here<<\n");
+		_myputs("TODO: >>getcwd non-success msg here<<\n");
 
 	if (!info->argv[1])
 	{
@@ -26,14 +26,15 @@ int change_cd(info_t *info)
 		else
 			chdir_output = chdir(diry);
 	}
-	else if (_strcmp(info->argv[1], "-") == 0)
+	else if (comp_str(info->argv[1], "-") == 0)
 	{
 		if (!get_env(info, "OLDPWD="))
 		{
-			printf("%s\n", sttr);
+			_myputs(sttr);
+			_myputchar('\n');
 			return (1);
 		}
-		printf(get_env(info, "OLDPWD=")), _putchar('\n');
+		_myputs(get_env(info, "OLDPWD=")), _myputchar('\n');
 		chdir_output = /* TODO: What's this supposed to be about? */
 			chdir((diry = get_env(info, "OLDPWD=")) ? diry : "/");
 	}
@@ -41,13 +42,12 @@ int change_cd(info_t *info)
 	{
 		chdir_output = chdir(info->argv[1]);
 	}
-
 	if (chdir_output == -1)
 		_printerr(info, "can't change the directory to ");
 		_myeputs(info->argv[1]), _myeputchar('\n');
 	else
-		_setenv(info, "OLDPWD", get_env(info, "PWD="));
-		_setenv(info, "PWD", getcwd(buffer, 1024));
+		set_env(info, "OLDPWD", get_env(info, "PWD="));
+		set_env(info, "PWD", getcwd(buffer, 1024));
 	return (0);
 }
 
@@ -73,10 +73,10 @@ int exit_sh(info_t *info)
 			_myeputchar('\n');
 			return (1);
 		}
-		info->err_num = err_atoi(info->argv[1]);
+		info->_errnum = err_atoi(info->argv[1]);
 		return (-2);
 	}
-	info->err_num = -1;
+	info->_errnum = -1;
 	return (-2);
 }
 
@@ -92,8 +92,8 @@ int get_help(info_t *info)
 	char **arg_array;
 
 	arg_array = info->argv;
-	printf("The help call working. The function is not yet implemented \n");
+	_myputs("The help call working. The function is not yet implemented \n");
 	if (0)
-		printf(*arg_array);
+		_myputs(*arg_array);
 	return (0);
 }
