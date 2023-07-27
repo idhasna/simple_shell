@@ -29,18 +29,6 @@ typedef struct liststr
 } list_t;
 
 /**
- * struct builtin - It contains the builtin string and a related function .
- * @fnc: The function points to the builtin commands .
- * @name: The builtin command's name .
- */
-
-typedef struct builtin
-{
-	char *name;
-	int (*fnc)(info_t *);
-} builtin_table
-
-/**
  * struct passinfo - Got pseudoarguements which are going to get a function,
  * to allow for a single prototype of the function pointer struct .
  * @path: The string path for the existing command .
@@ -85,6 +73,17 @@ typedef struct passinfo
         int readfd;
         int histcount;
 } info_t;
+
+/**
+ * struct builtin - It contains the builtin string and a related function .
+ * @type: The builtin command flag .
+ * @func: The function .
+ */
+typedef struct builtin
+{
+	char *type;
+	int (*func)(info_t *);
+} builtin_table;
 
 #define HIST_FILE "simple_shell_history"
 #define HIST_MAX 4096
