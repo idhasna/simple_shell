@@ -10,7 +10,6 @@
 
 int main(int argc, char **argv)
 {
-	info_t info[] = { INFO_INIT };
 	int fle_des = 2;
 
 	asm ("mov %1, %0\n\t"

@@ -65,7 +65,7 @@ char **split_str(char *sttr, char *delimeter)
 	if (!delimeter)
 		delimeter = " ";
 	for (index = 0; sttr[index] != '\0'; index++)
-		if (!_isdelim(sttr[index], delimeter) &&
+		if (!_isdelime(sttr[index], delimeter) &&
 			(_isdelime(sttr[index + 1], delimeter) || !sttr[index + 1]))
 			_numbwords++;
 

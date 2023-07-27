@@ -13,7 +13,7 @@
 #include <string.h>
 #include <sys/wait.h>
 
-extern char **environ
+extern char **environ;
 /**
  * struct liststr - A singly linked list .
  * @numb: The field of the number .
@@ -37,30 +37,30 @@ typedef struct liststr
 typedef struct builtin
 {
 	char *name;
-	int (*fnc)(info_t *);
+	int (*fnc)(ino_t *);
 } builtin_table;
 
 /* interactive.c */
 int _isdelime(char, char *);
 int is_alpha(int);
 int _myatoi(char *);
-int _isinteractive(info_t *);
+int _isinteractive(ino_t *);
 
 /* help.c */
-int change_cd(info_t *);
-int get_help(info_t *);
-int exit_sh(info_t *);
+int change_cd(ino_t *);
+int get_help(ino_t *);
+int exit_sh(ino_t *);
 
 /* setalias.c */
-int m_alias(info_t *);
-int _dishistory(info_t *);
+int m_alias(ino_t *);
+int _dishistory(ino_t *);
 
 /* setenv.c */
-int mod_setenv(info_t *);
-int rmv_unsetenv(info_t *);
-int print_env(info_t *);
-char *get_env(info_t *, const char *);
-int pop_envlist(info_t *);
+int mod_setenv(ino_t *);
+int rmv_unsetenv(ino_t *);
+int print_env(ino_t *);
+char *get_env(ino_t *, const char *);
+int pop_envlist(ino_t *);
 
 /* err.c */
 int _myputfd(char charc, int file_des);
@@ -70,7 +70,7 @@ void _myputs(char *);
 
 /* err1.c */
 void rmv_comments(char *);
-void _printerr(info_t *, char *);
+void _printerr(ino_t *, char *);
 char *conv_number(long int, int, int);
 int err_atoi(char *);
 int write_dec(int, int);
@@ -81,8 +81,8 @@ char *str_cpy(char *, char *, int);
 char *str_ch(char *, char);
 
 /* getinput.c */
-int get_line(info_t *, char **, size_t *);
-ssize_t _getinput(info_t *);
+int get_line(ino_t *, char **, size_t *);
+ssize_t _getinput(ino_t *);
 void _siginthandler(int);
 
 /* getenviron.c */
@@ -103,26 +103,26 @@ int _readhistory(ino_t *info);
 char *_gethistory(ino_t *info);
 
 /* nodes.c */
-int _deletenode(listr_t **, unsigned int);
-list_t *_addnodeend(listr_t **, const char *, int);
-void list_free(listr_t **);
-list_t *_addnode(listr_t **, const char *, int);
-size_t write_sttr_list(const listr_t *);
+int _deletenode(list_t **, unsigned int);
+list_t *_addnodeend(list_t **, const char *, int);
+void list_free(list_t **);
+list_t *_addnode(list_t **, const char *, int);
+size_t write_sttr_list(const list_t *);
 
 /* Lists.c */
-list_t *prefix_node(listr_t *, char *, char);
-char **conve_list_str(listr_t *);
-ssize_t node_index(listr_t *, listr_t *);
-size_t length_list(const listr_t *);
-size_t write_list(const listr_t *);
+list_t *prefix_node(list_t *, char *, char);
+char **conve_list_str(list_t *);
+ssize_t node_index(list_t *, list_t *);
+size_t length_list(const list_t *);
+size_t write_list(const list_t *);
 
 /* Memory.c */
 int free_pntr(void **);
 
 /* path.c */
 char *_dupcharacter(char *, int, int);
-int execut_comnd(info_t *, char *);
-char *_findpath(info_t *, char *, char *);
+int execut_comnd(ino_t *, char *);
+char *_findpath(ino_t *, char *, char *);
 
 /* setmemory.c */
 void str_free(char **);
@@ -149,7 +149,7 @@ char **split_str1(char *, char);
 char **split_str(char *, char *);
 
 /* alias.c */
-int rep_vars(info_t *);
+int rep_vars(ino_t *);
 void chain_check(ino_t *, char *, size_t *, size_t, size_t);
 int rep_str(char **, char *);
 int _ischain(ino_t *, char *, size_t *);
@@ -199,7 +199,7 @@ typedef struct passinfo
 	int cmd_buf_type; /* CMD_type ||, &&, ; */
 	int readfd;
 	int histcount;
-} info_t;
+} ino_t;
 
 #define HIST_FILE "simple_shell_history"
 #define HIST_MAX 4096
