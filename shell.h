@@ -38,7 +38,7 @@ typedef struct builtin
 {
 	char *name;
 	int (*fnc)(info_t *);
-} builtin_table;
+} builtin_table
 
 /**
  * struct passinfo - Got pseudoarguements which are going to get a function,
