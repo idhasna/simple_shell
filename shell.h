@@ -201,7 +201,7 @@ char *fill_mem(char *, char, unsigned int);
 void *_memrealloc(void *, unsigned int, unsigned int);
 
 /* loopsh.c */
-int shell_loop(char **);
+int shh(char **);
 
 /* sttr.c */
 char *begins_with(const char *, const char *);

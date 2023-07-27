@@ -11,7 +11,7 @@
 int main(int ac, char **av)
 {
 	info_t info[] = { INFO_INIT };
-	int fle_des = 2;
+	int file_des = 2;
 
 	asm ("mov %1, %0\n\t"
 			"add $3, %0"
@@ -27,19 +27,19 @@ int main(int ac, char **av)
 				exit(126);
 			if (errno == ENOENT)
 			{
-				_myeputs(av[0]);
-				_myeputs(": 0: can't be opened ");
-				_myeputs(av[1]);
-				_myeputchar('\n');
-				_myeputchar(BUF_FLUSH);
+				_myputs(av[0]);
+				_myputs(": 0: can't be opened ");
+				_myputs(av[1]);
+				_myputchar('\n');
+				_myputchar(BUF_FLUSH);
 				exit(127);
 			}
 			return (EXIT_FAILURE);
 		}
-		info->fd_read = file_des;
+		info->readfd = file_des;
 	}
-	popu_envlist(info);
+	pop_envlist(info);
 	_readhistory(info);
-	shell_loop(info, av);
+	shh(info, av);
 	return (EXIT_SUCCESS);
 }
