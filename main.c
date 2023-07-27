@@ -40,6 +40,6 @@ int main(int ac, char **av)
 	}
 	pop_envlist(info);
 	_readhistory(info);
-	shh(info, av);
+	hsh(info, av);
 	return (EXIT_SUCCESS);
 }

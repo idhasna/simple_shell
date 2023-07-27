@@ -44,13 +44,13 @@ void _findcomnd(info_t *info)
 }
 
 /**
- * shell_loop - The main shell loop .
+ * hsh - The main shell loop .
  * @av: The argument vector .
  * @info: The structure of the parameter .
  * Return: On success 0, On error 1 .
  */
 
-int shell_loop(info_t *info, char **av)
+int hsh_loop(info_t *info, char **av)
 {
 	ssize_t result = 0;
 	int return_builtin = 0;
