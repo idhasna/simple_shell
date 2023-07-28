@@ -147,8 +147,8 @@ int err_atoi(char *);
 int write_dec(int, int);
 
 /* strings.c */
-char *str_cnct(char *, char *, int);
-char *str_cpy(char *, char *, int);
+char *str_cnct(char *, char);
+char *str_cpy(char *, char);
 char *str_ch(char *, char);
 
 /* getinput.c */
