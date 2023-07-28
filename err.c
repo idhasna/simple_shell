@@ -15,7 +15,7 @@ int _myputfd(char ch, int file_des)
 
 	if (ch == BUF_FLUSH || index >= WRITE_BUF_SIZE)
 	{
-		printf(file_des, buff, index);
+		write(file_des, buff, index);
 		index = 0;
 	}
 	if (ch != BUF_FLUSH)
