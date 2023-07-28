@@ -18,7 +18,7 @@ int _deletenode(list_t **first, unsigned int _index)
 	if (!_index)
 	{
 		als_node = *first;
-		*first = (*first)->next;
+		*first = (*first)->_next;
 		free(als_node->sttr);
 		free(als_node);
 		return (1);
@@ -28,14 +28,14 @@ int _deletenode(list_t **first, unsigned int _index)
 	{
 		if (index == _index)
 		{
-			prev_node->next = als_node->next;
+			prev_node->next = als_node->_next;
 			free(als_node->sttr);
 			free(als_node);
 			return (1);
 		}
 		index++;
 		prev_node = als_node;
-		als_node = als_node->next;
+		als_node = als_node->_next;
 	}
 	return (0);
 }
@@ -59,7 +59,7 @@ list_t *_addnodend(list_t **first, const char *sttr, int numb)
 	_newnode = malloc(sizeof(list_t));
 	if (!_newnode)
 		return (NULL);
-	_memset((void *)_newnode, 0, sizeof(list_t));
+	memset((void *)_newnode, 0, sizeof(list_t));
 	_newnode->numb = numb;
 	if (sttr)
 	{
@@ -72,9 +72,9 @@ list_t *_addnodend(list_t **first, const char *sttr, int numb)
 	}
 	if (als_node)
 	{
-		while (als_node->next)
-			als_node = als_node->next;
-		als_node->next = _newnode;
+		while (als_node->_next)
+			als_node = als_node->_next;
+		als_node->_next = _newnode;
 	}
 	else
 		*first = _newnode;
@@ -97,7 +97,7 @@ void list_free(list_t **pntr_head)
 	als_node = first;
 	while (als_node)
 	{
-		_nextnode = als_node->next;
+		_nextnode = als_node->_next;
 		free(als_node->sttr);
 		free(als_node);
 		als_node = _nextnode;
@@ -133,7 +133,7 @@ list_t *_addnode(list_t **first, const char *sttr, int numb)
 			return (NULL);
 		}
 	}
-	_newfirst->next = *first;
+	_newfirst->_next = *first;
 	*first = _newfirst;
 	return (_newfirst);
 }
@@ -152,7 +152,7 @@ size_t write_sttr_list(const list_t *pheader)
 	{
 		_myputs(pheader->sttr ? pheader->sttr : "(NULL)");
 		_myputs("\n");
-		pheader = pheader->next;
+		pheader = pheader->_next;
 		index++;
 	}
 	return (index);

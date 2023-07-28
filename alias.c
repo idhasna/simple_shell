@@ -19,7 +19,7 @@ int rep_vars(info_t *info)
 		if (!comp_str(info->argv[index], "$?"))
 		{
 			rep_str(&(info->argv[index]),
-					dup_str(conv_number(info->status, 10, 0)));
+					dup_str(conv_number(info->_status, 10, 0)));
 			continue;
 		}
 		if (!comp_str(info->argv[index], "$$"))
@@ -58,7 +58,7 @@ void chain_check(info_t *info, char *buff, size_t *pos,
 
 	if (info->cmd_buf_type == CMD_AND)
 	{
-		if (info->status)
+		if (info->_status)
 		{
 			buff[index] = 0;
 			x = _bufflen;
@@ -66,7 +66,7 @@ void chain_check(info_t *info, char *buff, size_t *pos,
 	}
 	if (info->cmd_buf_type == CMD_OR)
 	{
-		if (!info->status)
+		if (!info->_status)
 		{
 			buff[index] = 0;
 			x = _bufflen;
@@ -139,7 +139,7 @@ int rep_als(info_t *info)
 
 	for (index = 0; index < 10; index++)
 	{
-		als_node = prefix_node(info->alias, info->argv[0], '=');
+		als_node = prefix_node(info->als, info->argv[0], '=');
 		if (!als_node)
 			return (0);
 		free(info->argv[0]);

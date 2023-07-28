@@ -17,7 +17,7 @@ list_t *prefix_node(list_t *als_node, char *_prefix, char charc)
 		pos = begins_with(als_node->sttr, _prefix);
 		if (pos && ((charc == -1) || (*pos == charc)))
 			return (als_node);
-		als_node = als_node->next;
+		als_node = als_node->_next;
 	}
 	return (NULL);
 }
@@ -40,7 +40,7 @@ char **conve_list_str(list_t *first)
 	sttrs = malloc(sizeof(char *) * (index + 1));
 	if (!sttrs)
 		return (NULL);
-	for (index = 0; als_node; als_node = als_node->next, index++)
+	for (index = 0; als_node; als_node = als_node->_next, index++)
 	{
 		sttr = malloc(length_str(als_node->sttr) + 1);
 		if (!sttr)
@@ -73,7 +73,7 @@ ssize_t node_index(list_t *first, list_t *als_node)
 	{
 		if (first == als_node)
 			return (index);
-		first = first->next;
+		first = first->_next;
 		index++;
 	}
 	return (-1);
@@ -91,7 +91,7 @@ size_t length_list(const list_t *pheader)
 
 	while (pheader)
 	{
-		pheader = pheader->next;
+		pheader = pheader->_next;
 		index++;
 	}
 	return (index);
@@ -114,7 +114,7 @@ size_t write_list(const list_t *pheader)
 		_myputchar(' ');
 		_myputs(pheader->sttr ? pheader->sttr : "(NULL)");
 		_myputs("\n");
-		pheader = pheader->next;
+		pheader = pheader->_next;
 		index++;
 	}
 	return (index);

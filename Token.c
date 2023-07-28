@@ -76,7 +76,7 @@ char **split_str(char *sttr, char *delimeter)
 		return (NULL);
 	for (index = 0, x = 0; x < _numbwords; x++)
 	{
-		while (_isdelim(sttr[index], delimeter))
+		while (_isdelime(sttr[index], delimeter))
 			index++;
 		y = 0;
 		while (!_isdelim(sttr[index + y], delimeter) && sttr[index + y])

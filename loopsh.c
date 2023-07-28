@@ -79,8 +79,8 @@ int hsh_loop(info_t *info, char **av)
 		exit(info->_status);
 	if (return_builtin == -2)
 	{
-		if (info->err_num == -1)
-			exit(info->status);
+		if (info->_errnum == -1)
+			exit(info->_status);
 		exit(info->_errnum);
 	}
 	return (return_builtin);
@@ -107,7 +107,7 @@ void _forkcomnd(info_t *info)
 	{
 		if (execve(info->f_path, info->argv, get_env_cpy(info)) == -1)
 		{
-			free_info(info, 1);
+			_freeinfo(info, 1);
 			if (errno == EACCES)
 				exit(126);
 			exit(1);
@@ -138,7 +138,7 @@ void _forkcomnd(info_t *info)
 int builtin_find(info_t *info)
 {
 	int index, builtin_return = -1;
-	builtin_t built_intbl[] = {
+	builtin_table built_intbl[] = {
 		{"exit", exit_sh},
 		{"env", print_env},
 		{"help", get_help},

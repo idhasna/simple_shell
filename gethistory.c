@@ -41,10 +41,10 @@ int print_history(info_t *info)
 	free(f_name);
 	if (file_des == -1)
 		return (-1);
-	for (als_node = info->_history; als_node; als_node = als_node->next)
+	for (als_node = info->_history; als_node; als_node = als_node->_next)
 	{
 		_myputsfd(als_node->sttr, file_des);
-		_myputfd('\n', fd);
+		_myputfd('\n', file_des);
 	}
 	_myputfd(BUF_FLUSH, file_des);
 	close(file_des);
@@ -66,7 +66,7 @@ int _renumbhistory(info_t *info)
 	while (als_node)
 	{
 		als_node->numb = index++;
-		als_node = als_node->next;
+		als_node = als_node->_next;
 	}
 	return (info->hist_count = index);
 }

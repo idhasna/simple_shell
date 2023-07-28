@@ -10,10 +10,10 @@ void _freeinfo(info_t *info, int _freeall)
 {
 	str_free(info->argv);
 	info->argv = NULL;
-	info->path = NULL;
+	info->f_path = NULL;
 	if (_freeall)
 	{
-		if (!info->comd_buff)
+		if (!info->cmd_buf)
 			free(info->arg);
 		if (info->env)
 			list_free(&(info->env));
@@ -23,7 +23,7 @@ void _freeinfo(info_t *info, int _freeall)
 			list_free(&(info->als));
 		str_free(info->_environ);
 			info->_environ = NULL;
-		free_pntr((void **)info->comd_buff);
+		free_pntr((void **)info->cmd_buf);
 		if (info->fd_read > 2)
 			close(info->fd_read);
 		_myputchar(BUF_FLUSH);

@@ -12,8 +12,8 @@ int write_alias(list_t *als_node)
 
 	if (als_node)
 	{
-		pos = str_ch(als_node->st, '=');
-		for (als_name = als_node->st; als_name <= pos; als_name++)
+		pos = str_ch(als_node->sttr, '=');
+		for (als_name = als_node->sttr; als_name <= pos; als_name++)
 		_myputchar(*als_name);
 		_myputchar("'\n");
 		_myputs(pos + 1);
@@ -73,7 +73,7 @@ int m_alias(info_t *info)
 	{
 		pos = str_ch(info->argv[index], '=');
 		if (pos)
-			_set_alias(info, info->argv[index]);
+			_unsetalias(info, info->argv[index]);
 		else
 			write_alias(prefix_node(info->als, info->argv[index], '='));
 }

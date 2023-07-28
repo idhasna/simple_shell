@@ -36,7 +36,7 @@ int set_env(info_t *info, char *varb, char *strenvalue)
 			info->change_env = 1;
 			return (0);
 		}
-		als_node = als_node->next;
+		als_node = als_node->_next;
 	}
 	_addnodeend(&(info->env), buff, 0);
 	free(buff);
@@ -66,12 +66,12 @@ int unset_env(info_t *info, char *varb)
 		pos = begins_with(als_node->sttr, varb);
 		if (pos && *pos == '=')
 		{
-			info->change_env = _delete_node(&(info->env), index);
+			info->change_env = _deletenode(&(info->env), index);
 			index = 0;
 			als_node = info->env;
 			continue;
 		}
-		als_node = als_node->next;
+		als_node = als_node->_next;
 		index++;
 	}
 	return (info->change_env);

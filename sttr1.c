@@ -56,7 +56,7 @@ int _myputchar(char charc)
 
 	if (charc == BUF_FLUSH || index >= WRITE_BUF_SIZE)
 	{
-		print(1, buff, index);
+		write(1, buff, index);
 		index = 0;
 	}
 	if (charc != BUF_FLUSH)
