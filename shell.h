@@ -177,7 +177,7 @@ char *_gethistory(info_t *info);
 
 /* nodes.c */
 int _deletenode(list_t **, unsigned int);
-list_t *_addnodeend(list_t **, const char *, int);
+list_t *add_node_end(list_t **, const char *, int);
 void list_free(list_t **);
 list_t *_addnode(list_t **, const char *, int);
 size_t write_sttr_list(const list_t *);

@@ -41,14 +41,14 @@ int _deletenode(list_t **first, unsigned int _index)
 }
 
 /**
- * _addnodend - A node is added to the end of the list .
+ * add_nod_end - A node is added to the end of the list .
  * @sttr: The string file descriptor of the node .
  * @first: The address of the first node .
  * @numb: The node index used by the history .
  * Return: The size of the list .
  */
 
-list_t *_addnodend(list_t **first, const char *sttr, int numb)
+list_t *add_nod_end(list_t **first, const char *sttr, int numb)
 {
 	list_t *_newnode, *als_node;
 
