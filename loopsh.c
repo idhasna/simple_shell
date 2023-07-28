@@ -50,7 +50,7 @@ void _findcomnd(info_t *info)
  * Return: On success 0, On error 1 .
  */
 
-int hsh_loop(info_t *info, char **av)
+int hsh(info_t *info, char **av)
 {
 	ssize_t result = 0;
 	int return_builtin = 0;
