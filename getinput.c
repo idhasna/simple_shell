@@ -61,7 +61,7 @@ ssize_t _getinput(info_t *info)
 	char **_buffpos = &(info->arg), *pos;
 
 	_myputchar(BUF_FLUSH);
-	result = input_buf(info, &buff, &_bufflen);
+	result = _inputbuf(info, &buff, &_bufflen);
 	if (result == -1) /* End Of File */
 		return (-1);
 	if (_bufflen) /* In the chain buffer, we've got commands left. */

@@ -155,7 +155,7 @@ char *str_ch(char *, char);
 int get_line(info_t *, char **, size_t *);
 ssize_t _getinput(info_t *);
 void sigint_handler(int);
-ssize_t buf_read(info_t *, char **, size_t *);
+ssize_t buf_read(info_t *, char *, size_t *);
 ssize_t _inputbuf(info_t *, char **, size_t *);
 
 /* getenviron.c */
