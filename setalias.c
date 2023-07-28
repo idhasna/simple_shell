@@ -26,22 +26,22 @@ int write_alias(list_t *als_node)
 /**
  * _unsetalias - Unsets the alias to the strings .
  * @info: The structure parameter .
- * @s: The alias of strings .
+ * @sttr: The alias of strings .
  * Return: If success 0, if error 1 .
  */
 
-int _unsetalias(info_t *info, char s)
+int _unsetalias(info_t *info, char *sttr)
 {
 	char *pos, ch;
 	int rtn;
 
-	pos = str_ch(s, '=');
+	pos = str_ch(sttr, '=');
 	if (!pos)
 		return (1);
 	ch = *pos;
 	*pos = 0;
 	rtn = _deletenode(&(info->als),
-		node_index(info->als, prefix_node(info->als, s, -1)));
+		node_index(info->als, prefix_node(info->als, sttr, -1)));
 	*pos = ch;
 	return (rtn);
 }
@@ -97,22 +97,22 @@ int _dishistory(info_t *info)
 
 /**
  * _set_alias - Sets the alias to the strings .
- * @s: An alias of strings .
+ * @sttr: An alias of strings .
  * @info: The structure of the parameter .
  * Return: If success 0, if error 1 .
  */
 
-int _set_alias(info_t *info, char *s)
+int _set_alias(info_t *info, char *sttr)
 {
 	char *pos;
 
-	pos = str_ch(s, '=');
+	pos = str_ch(sttr, '=');
 	if (!pos)
 		return (1);
 
 	if (!*++pos)
-		return (_unsetalias(info, s));
+		return (_unsetalias(info, sttr));
 
-	_unsetalias(info, s);
-	return (_addnodeend(&(info->als), s, 0) == NULL);
+	_unsetalias(info, sttr);
+	return (_addnodeend(&(info->als), sttr, 0) == NULL);
 }
