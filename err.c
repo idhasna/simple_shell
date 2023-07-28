@@ -43,13 +43,13 @@ void my_eputs(char *sttr)
 }
 
 /**
- * _myputsfd - Writes the input string to a given file descriptor .
+ * my_putsfd - Writes the input string to a given file descriptor .
  * @file_des: The file descriptor to use for writing .
  * @sttr: The printed string .
  * Return: The number of characters .
  */
 
-int _myputsfd(char *sttr, int file_des)
+int my_putsfd(char *sttr, int file_des)
 {
 	int index = 0;
 
@@ -63,7 +63,7 @@ int _myputsfd(char *sttr, int file_des)
 }
 
 /**
- * _myeputchar - Prints the character to the standard error .
+ * my_eputchar - Prints the character to the standard error .
  * @ch: The printed character .
  * Return: On success 1. When error occurs,
  * -1 is returned and errno set to correct .
@@ -75,7 +75,7 @@ int _myeputchar(char ch)
 
 	if (ch == BUF_FLUSH || index >= WRITE_BUF_SIZE)
 	{
-		print(2, buff, index);
+		write(2, buff, index);
 		index = 0;
 	}
 	if (ch != BUF_FLUSH)
