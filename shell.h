@@ -205,6 +205,7 @@ void *_memrealloc(void *, unsigned int, unsigned int);
 /* loopsh.c */
 int hsh(info_t *, char **);
 void fork_comnd(info_t *info);
+int builtin_find(info_t *info);
 
 /* sttr.c */
 char *begins_with(const char *, const char *);
