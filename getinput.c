@@ -81,7 +81,7 @@ ssize_t _getinput(info_t *info)
 		if (index >= _bufflen) /* Is the buffer reached its end?*/
 		{
 			index = _bufflen = 0; /* Init length and position */
-			info->comd_buff_t = CMD_NORM;
+			info->cmd_buf_type = CMD_NORM;
 		}
 
 		*_buffpos = pos; /* Return  pointer to existing command position */
@@ -135,11 +135,11 @@ ssize_t _buffinput(info_t *info, char **buff, size_t *_bufflen)
 				result--;
 			}
 			info->_flinecount = 1;
-			rmv_comment(*buff);
+			rmv_comments(*buff);
 			list_history(info, *buff, info->hist_count++);
 			{
 				*_bufflen = result;
-				info->comd_buff = buff;
+				info->cmd_buf = buff;
 			}
 		}
 	}

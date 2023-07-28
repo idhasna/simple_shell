@@ -43,7 +43,7 @@ char *str_cnct(char *frst_str, char *scnd_str, int nb)
 		frst_str[dest_index] = '\0';
 	return (sttr);
 }
-i
+
 /**
  * str_cpy - It copies the string .
  * @nb: The number of characters to be copied .
