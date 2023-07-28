@@ -13,11 +13,11 @@ int rmv_unsetenv(info_t *info)
 
 	if (info->argc == 1)
 	{
-		_myeputs("One or two arguements.\n");
+		my_eputs("One or two arguements.\n");
 		return (1);
 	}
 	for (index = 1; index <= info->argc; index++)
-		_unsetenv(info, info->argv[index]);
+		unset_env(info, info->argv[index]);
 
 	return (0);
 }
@@ -40,7 +40,7 @@ char *get_env(info_t *info, const char *name)
 		pos = begins_with(als_node->sttr, name);
 		if (pos && *pos)
 			return (pos);
-		als_node = als_node->next;
+		als_node = als_node->_next;
 	}
 	return (NULL);
 }
@@ -72,7 +72,7 @@ int pop_envlist(info_t *info)
 
 int print_env(info_t *info)
 {
-	print_sttr_list(info->env);
+	write_sttr_list(info->env);
 	return (0);
 }
 
