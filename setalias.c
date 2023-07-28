@@ -12,8 +12,8 @@ int write_alias(list_t *als_node)
 
 	if (als_node)
 	{
-		pos = str_ch(als_node->sttr, '=');
-		for (als_name = als_node->sttr; als_name <= pos; als_name++)
+		pos = str_ch(als_node->st, '=');
+		for (als_name = als_node->st; als_name <= pos; als_name++)
 		_myputchar(*als_name);
 		_myputchar("'\n");
 		_myputs(pos + 1);
@@ -26,23 +26,23 @@ int write_alias(list_t *als_node)
 /**
  * _unsetalias - Unsets the alias to the strings .
  * @info: The structure parameter .
- * @sttr: The alias of strings .
+ * @st: The alias of strings .
  * Return: If success 0, if error 1 .
  */
 
-int _unsetalias(info_t *info, char sttr)
+int _unsetalias(info_t *info, char st)
 {
-	char *pos, charc;
+	char *pos, ch;
 	int rtn;
 
-	pos = str_ch(sttr, '=');
+	pos = str_ch(st, '=');
 	if (!pos)
 		return (1);
-	charc = *pos;
+	ch = *pos;
 	*pos = 0;
-	rtn = _delete_node(&(info->als),
-		node_index(info->als, prefix_node(info->als, sttr, -1)));
-	*pos = charc;
+	rtn = _deletenode(&(info->als),
+		node_index(info->als, prefix_node(info->als, st, -1)));
+	*pos = ch;
 	return (rtn);
 }
 
@@ -73,7 +73,7 @@ int m_alias(info_t *info)
 	{
 		pos = str_ch(info->argv[index], '=');
 		if (pos)
-			_setalias(info, info->argv[index]);
+			_set_alias(info, info->argv[index]);
 		else
 			write_alias(prefix_node(info->als, info->argv[index], '='));
 }
@@ -96,23 +96,23 @@ int _dishistory(info_t *info)
 }
 
 /**
- * _setalias - Sets the alias to the strings .
- * @sttr: An alias of strings .
+ * _set_alias - Sets the alias to the strings .
+ * @st: An alias of strings .
  * @info: The structure of the parameter .
  * Return: If success 0, if error 1 .
  */
 
-int _setalias(info_t *info, char *sttr)
+int _set_alias(info_t *info, char *st)
 {
 	char *pos;
 
-	pos = str_ch(sttr, '=');
+	pos = str_ch(st, '=');
 	if (!pos)
 		return (1);
 
 	if (!*++pos)
-		return (_unsetalias(info, sttr));
+		return (_unsetalias(info, st));
 
-	_unsetalias(info, sttr);
-	return (_addnodeend(&(info->als), sttr, 0) == NULL);
+	_unsetalias(info, st);
+	return (_addnodeend(&(info->als), st, 0) == NULL);
 }
