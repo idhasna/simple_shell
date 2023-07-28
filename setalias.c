@@ -15,7 +15,7 @@ int write_alias(list_t *als_node)
                 pos = str_ch(als_node->sttr, '=');
                 for (als_name = als_node->sttr; als_name <= pos; als_name++)
                 _myputchar(*als_name);
-                _myputchar(('\''))
+                _myputchar('\'');
                 _myputs(pos + 1);
                 _myputs("'\n");
                 return (0);
