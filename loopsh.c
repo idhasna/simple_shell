@@ -65,7 +65,7 @@ int hsh_loop(info_t *info, char **av)
 		if (result != -1)
 		{
 			_setinfo(info, av);
-			(return_builtin = find_builtin(info));
+			(return_builtin = builtin_find(info));
 			if (return_builtin == -1)
 				_findcomnd(info);
 		}
