@@ -34,7 +34,7 @@ void _findcomnd(info_t *info)
 	{
 		if ((_isinteractive(info) || get_env(info, "PATH=")
 					|| info->argv[0][0] == '/') && execut_comnd(info, info->argv[0]))
-			_forkcomnd(info);
+			fork_comnd(info);
 		else if (*(info->arg) != '\n')
 		{
 			info->_status = 127;
@@ -87,12 +87,12 @@ int hsh_loop(info_t *info, char **av)
 }
 
 /**
- * _forkcomnd - Forks an executable command to run the command .
+ * fork_comnd - Forks an executable command to run the command .
  * @info: The structure of the parameter .
  * Return: Void .
  */
 
-void _forkcomnd(info_t *info)
+void fork_comnd(info_t *info)
 {
 	pid_t pid_child;
 
