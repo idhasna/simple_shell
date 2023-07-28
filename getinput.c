@@ -61,7 +61,7 @@ ssize_t _getinput(info_t *info)
 	char **_buffpos = &(info->arg), *pos;
 
 	_myputchar(BUF_FLUSH);
-	result = inputbuf(info, &buff, &_bufflen);
+	result = inpu_tbuf(info, &buff, &_bufflen);
 	if (result == -1) /* End Of File */
 		return (-1);
 	if (_bufflen) /* In the chain buffer, we've got commands left. */
@@ -106,13 +106,13 @@ void sigint_handler(__attribute__((unused))int _signumb)
 }
 
 /**
- * inputbuf - The buffers of chained commands .
+ * inpu_tbuf - The buffers of chained commands .
  * @_bufflen: The adress of the length .
  * @buff: The adress of the buffer .
  * @info: The structure of the parameter .
  */
 
-ssize_t inputbuf(info_t *info, char **buff, size_t *_bufflen)
+ssize_t inpu_tbuf(info_t *info, char **buff, size_t *_bufflen)
 {
 	ssize_t result = 0;
 	size_t _lenpos = 0;
