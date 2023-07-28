@@ -22,9 +22,9 @@ int set_env(info_t *info, char *varb, char *strenvalue)
 	buff = malloc(length_str(varb) + length_str(strenvalue) + 2);
 	if (!buff)
 		return (1);
-	str_cpy(buff, varb, BUFF_SIZE);
-	str_cnct(buff, "=", BUFF_SIZE);
-	str_cnct(buff, strenvalue, BUFF_SIZE);
+	str_cpy(buff, varb, BUFSIZ);
+	str_cnct(buff, "=", BUFSIZ);
+	str_cnct(buff, strenvalue, BUFSIZ);
 	als_node = info->env;
 	while (als_node)
 	{
