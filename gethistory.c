@@ -88,9 +88,9 @@ char *_gethistory(info_t *info)
 	if (!buff)
 		return (NULL);
 	buff[0] = 0;
-	str_cpy(buff, diry);
-	str_cnct(buff, "/");
-	str_cnct(buff, HIST_FILE);
+	str_cpy(buff, diry, BUFSIZ);
+	str_cnct(buff, "/", BUFSIZ);
+	str_cnct(buff, HIST_FILE, BUFSIZ);
 	return (buff);
 }
 
