@@ -43,11 +43,15 @@ int change_cd(info_t *info)
 		chdir_output = chdir(info->argv[1]);
 	}
 	if (chdir_output == -1)
+	{
 		_printerr(info, "can't change the directory to ");
-		_myeputs(info->argv[1]), _myeputchar('\n');
+		my_eputs(info->argv[1]), my_eputchar('\n');
+	}
 	else
+	{
 		set_env(info, "OLDPWD", get_env(info, "PWD="));
 		set_env(info, "PWD", getcwd(buffer, 1024));
+	}
 	return (0);
 }
 
@@ -67,10 +71,10 @@ int exit_sh(info_t *info)
 		status_exit = err_atoi(info->argv[1]);
 		if (status_exit == -1)
 		{
-			info->status = 2;
+			info->_status = 2;
 			_printerr(info, "Illicit number: ");
-			_myeputs(info->argv[1]);
-			_myeputchar('\n');
+			my_eputs(info->argv[1]);
+			my_eputchar('\n');
 			return (1);
 		}
 		info->_errnum = err_atoi(info->argv[1]);

@@ -26,7 +26,7 @@ char *conv_number(long int numb, int base, int flg)
 	*pntr = '\0';
 
 	do	{
-		*--pntr = array[n % base];
+		*--pntr = array[nb % base];
 		nb /= base;
 	} while (nb != 0);
 
@@ -44,13 +44,13 @@ char *conv_number(long int numb, int base, int flg)
 
 void _printerr(info_t *info, char *err_sttr)
 {
-	_myeputs(info->fname);
-	_myeputs(": ");
+	my_eputs(info->f_name);
+	my_eputs(": ");
 	write_dec(info->_linecount, STDERR_FILENO);
-	_myeputs(": ");
-	_myeputs(info->argv[0]);
-	_myeputs(": ");
-	_myeputs(err_sttr);
+	my_eputs(": ");
+	my_eputs(info->argv[0]);
+	my_eputs(": ");
+	my_eputs(err_sttr);
 }
 
 /**
@@ -90,7 +90,7 @@ int err_atoi(char *sttr)
 		{
 			output *= 10;
 			output += (sttr[index] - '0');
-			if (outputt > INT_MAX)
+			if (output > INT_MAX)
 				return (-1);
 		}
 		else
@@ -113,7 +113,7 @@ int write_dec(int number, int file_des)
 	unsigned int abs_value, latest;
 
 	if (file_des == STDERR_FILENO)
-		__putchar = _myeputchar;
+		__putchar = my_eputchar;
 	if (number < 0)
 	{
 		abs_value = -number;

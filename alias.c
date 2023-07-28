@@ -56,17 +56,17 @@ void chain_check(info_t *info, char *buff, size_t *pos,
 {
 	size_t x = *pos;
 
-	if (info->comd_buff_t == CMD_AND)
+	if (info->cmd_buf_type == CMD_AND)
 	{
-		if (info->_status)
+		if (info->status)
 		{
 			buff[index] = 0;
 			x = _bufflen;
 		}
 	}
-	if (info->comd_buff_t == CMD_OR)
+	if (info->cmd_buf_type == CMD_OR)
 	{
-		if (!info->_status)
+		if (!info->status)
 		{
 			buff[index] = 0;
 			x = _bufflen;
@@ -106,18 +106,18 @@ int _ischain(info_t *info, char *buff, size_t *pos)
 	{
 		buff[x] = 0;
 		x++;
-		info->comd_buff_t = CMD_OR;
+		info->cmd_buf_type = CMD_OR;
 	}
 	else if (buff[x] == '&' && buff[x + 1] == '&')
 	{
 		buff[x] = 0;
 		x++;
-		info->comd_buff_t = CMD_AND;
+		info->cmd_buf_type = CMD_AND;
 	}
 	else if (buff[x] == ';') /* Found the end of this command */
 	{
 		buff[x] = 0; /* Replace the semicolon with null */
-		info->comd_buff_t = CMD_CHAIN;
+		info->cmd_buf_type = CMD_CHAIN;
 	}
 	else
 		return (0);

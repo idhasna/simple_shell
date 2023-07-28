@@ -2,13 +2,13 @@
 
 /**
  * is_alphab - Checks if the characters are alphabetics .
- * @charc: The character to check .
+ * @ch: The character to check .
  * Return: If the character is alphabetic 1, if no 0 .
  */
 
-int is_alphab(int charc)
+int is_alphab(int ch)
 {
-	if ((charc >= 'a' && charc <= 'z') || (charc >= 'A' && charc <= 'Z'))
+	if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
 		return (1);
 	else
 		return (0);
@@ -62,14 +62,14 @@ int _myatoi(char *sttr)
 /**
  * _isdelime - Checks if the characters are delimeters .
  * @str_delim: The string which is delimeter .
- * @charc: The character to be checked .
+ * @ch: The character to be checked .
  * Return: 1 on success, 0 on error .
  */
 
-int _isdelime(char charc, char *str_delim)
+int _isdelime(char ch, char *str_delim)
 {
 	while (*str_delim)
-		if (*str_delim++ == c)
+		if (*str_delim++ == ch)
 			return (1);
 	return (0);
 }

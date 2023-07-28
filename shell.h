@@ -31,22 +31,22 @@ typedef struct liststr
 /**
  * struct passinfo - Got pseudoarguements which are going to get a function,
  * to allow for a single prototype of the function pointer struct .
- * @path: The string path for the existing command .
- * @name: The file name of the program .
+ * @f_path: The string path for the existing command .
+ * @f_name: The file name of the program .
  * @argv: A set of strings derived from arguments .
- * @environ: A custom modified copy of the environ .
+ * @_environ: A custom modified copy of the environ .
  * @arg: A string generated with arguments contained in the getline .
- * @linecount_flag: Counting this line of input .
- * @history: The node of the history .
+ * @_flinecount: Counting this line of input .
+ * @_history: The node of the history .
  * @env: A local copy of environ listed in a linked list .
- * @aliass: The node of the alias .
- * @env_changed: The environ changes .
- * @histcount: The number of history line numbers .
-* @err_num: The error code for exit .
- * @readfd: The field from which input lines are read .
+ * @als: The node of the alias .
+ * @change_env: The environ changes .
+ * @hist_count: The number of history line numbers .
+ * @_errnum: The error code for exit .
+ * @fd_read: The field from which input lines are read .
  * @argc: The argument count .
- * @line_count: The error count .
- * @status: The status of the returned last executed command .
+ * @_linecount: The error count .
+ * @_status: The status of the returned last executed command .
  * @cmd_buf_type: The command type .
  * @cmd_buf: The address of the command buffer .
  */
@@ -55,23 +55,23 @@ typedef struct passinfo
 {
         char *arg;
         char **argv;
-        char *path;
+        char *f_path;
         int argc;
-        unsigned int line_count;
-        int err_num;
-        int linecount_flag;
-        char *fname;
+        unsigned int _linecount;
+        int _errnum;
+        int _flinecount;
+        char *f_name;
         list_t *env;
-        list_t *history;
-        list_t *alias;
-        char **environ;
-        int env_changed;
-        int status;
+        list_t *_history;
+        list_t *als;
+        char **_environ;
+        int change_env;
+        int _status;
 
         char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
         int cmd_buf_type; /* CMD_type ||, &&, ; */
-        int readfd;
-        int histcount;
+        int fd_read;
+        int hist_count;
 } info_t;
 
 /**
@@ -135,9 +135,9 @@ int pop_envlist(info_t *);
 
 /* err.c */
 int _myputfd(char charc, int file_des);
-int _myputsfd(char *sttr, int file_des);
-int _myputchar(char);
-void _myputs(char *);
+int my_putsfd(char *sttr, int file_des);
+int my_eputchar(char);
+void my_eputs(char *);
 
 /* err1.c */
 void rmv_comments(char *);
@@ -159,7 +159,7 @@ void _siginthandler(int);
 /* getenviron.c */
 int unset_env(info_t *, char *);
 char **get_env_cpy(info_t *);
-int set_env(ino_t *, char *, char *);
+int set_env(info_t *, char *, char *);
 
 /* setinfo.c */
 void _setinfo(info_t *, char **);
@@ -201,7 +201,7 @@ char *fill_mem(char *, char, unsigned int);
 void *_memrealloc(void *, unsigned int, unsigned int);
 
 /* loopsh.c */
-int hsh(char **);
+int hsh(info_t *, char **);
 
 /* sttr.c */
 char *begins_with(const char *, const char *);
@@ -209,7 +209,7 @@ int length_str(char *);
 char *cnct_str(char *, char *);
 int comp_str(char *, char *);
 
-/* str.c */
+/* sttr1.c */
 void _myputs(char *);
 char *copy_str(char *, char *);
 int _myputchar(char);
