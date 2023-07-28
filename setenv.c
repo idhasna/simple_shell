@@ -37,7 +37,7 @@ char *get_env(info_t *info, const char *name)
 
 	while (als_node)
 	{
-		pos = begins_with(als_node->sttr, name);
+		pos = begins_with(als_node->st, name);
 		if (pos && *pos)
 			return (pos);
 		als_node = als_node->_next;
@@ -57,8 +57,8 @@ int pop_envlist(info_t *info)
 	list_t *als_node = NULL;
 	size_t index;
 
-	for (index = 0; _environ[index]; index++)
-		_addnodeend(&als_node, _environ[index], 0);
+	for (index = 0; environ[index]; index++)
+		_addnodeend(&als_node, environ[index], 0);
 	info->env = als_node;
 	return (0);
 }
@@ -88,7 +88,7 @@ int mod_setenv(info_t *info)
 {
 	if (info->argc != 3)
 	{
-		_myeputs("The number of arguements is incorrect\n");
+		my_eputs("The number of arguements is incorrect\n");
 		return (1);
 	}
 	if (set_env(info, info->argv[1], info->argv[2]))
