@@ -28,7 +28,7 @@ void _findcomnd(info_t *info)
 	if (f_path)
 	{
 		info->f_path = f_path;
-		fork_cmd(info);
+		fork_comnd(info);
 	}
 	else
 	{
@@ -65,7 +65,7 @@ int hsh_loop(info_t *info, char **av)
 		if (result != -1)
 		{
 			_setinfo(info, av);
-			(return_builtin = builtin_find(info));
+			(return_builtin = _builtinfind(info));
 			if (return_builtin == -1)
 				_findcomnd(info);
 		}
