@@ -22,7 +22,7 @@ int get_line(info_t *info, char **pntr, size_t *_bufflength)
 	if (index == _bufflen)
 		index = _bufflen = 0;
 
-	result = read_buf(info, buff, &_bufflen);
+	result = _buffread(info, buff, &_bufflen);
 	if (result == -1 || (result == 0 && _bufflen == 0))
 		return (-1);
 
