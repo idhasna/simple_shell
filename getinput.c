@@ -147,13 +147,13 @@ ssize_t input_buf(info_t *info, char **buff, size_t *_bufflen)
 }
 
 /**
- * readbuff - It reads the buffer .
+ * read_buf - It reads the buffer .
  * @buff: The buffer .
  * @info: The structure of the parameter .
  * @index: The size of buffers .
  */
 
-ssize_t readbuff(info_t *info, char *buff, size_t *index)
+ssize_t read_buf(info_t *info, char *buff, size_t *index)
 {
 	ssize_t result = 0;
 
