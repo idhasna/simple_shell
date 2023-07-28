@@ -136,7 +136,7 @@ int _readhistory(info_t *info)
 	if (last != index)
 		list_history(info, buff + last, line_count++);
 	free(buff);
-	info->histcount = line_count;
+	info->hist_count = line_count;
 	while (info->hist_count-- >= HIST_MAX)
 		_deletenode(&(info->_history), 0);
 	_renumbhistory(info);
