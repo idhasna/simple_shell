@@ -22,7 +22,7 @@ char *_findpath(info_t *info, char *str_path, char *comnd)
 	}
 	while (1)
 	{
-		if (!str_path[i] || str_path[index] == ':')
+		if (!str_path[index] || str_path[index] == ':')
 		{
 			f_path = _dupcharacter(str_path, _currpos, index);
 			if (!*f_path)

@@ -145,7 +145,7 @@ int builtin_find(info_t *info)
 		{"history", _dishistory},
 		{"setenv", mod_setenv},
 		{"unsetenv", rmv_unsetenv},
-		{"cd", _mycd},
+		{"cd", change_cd},
 		{"alias", m_alias},
 		{NULL, NULL}
 	};
@@ -154,7 +154,7 @@ int builtin_find(info_t *info)
 		if (comp_str(info->argv[0], built_intbl[index].type) == 0)
 		{
 			info->_linecount++;
-			builtin_return = built_intbl[i].fnc(info);
+			builtin_return = built_intbl[index].fnc(info);
 			break;
 		}
 	return (builtin_return);

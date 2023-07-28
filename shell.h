@@ -77,12 +77,12 @@ typedef struct passinfo
 /**
  * struct builtin - It contains the builtin string and a related function .
  * @type: The builtin command flag .
- * @func: The function .
+ * @fnc: The function .
  */
 typedef struct builtin
 {
 	char *type;
-	int (*func)(info_t *);
+	int (*fnc)(info_t *);
 } builtin_table;
 
 #define HIST_FILE "simple_shell_history"
