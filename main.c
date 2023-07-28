@@ -3,12 +3,12 @@
 
 /**
  * main - The entry point .
- * @argv: A list of pointers to the arguments .
- * @argc: The number of arguments that have been submitted to the program .
+ * @av: A list of pointers to the arguments .
+ * @ac: The number of arguments that have been submitted to the program .
  * Return: return to 0 if success and to 1 if error .
  */
 
-int main(int argc, char *argv[])
+int main(int ac, char **av)
 {
 	info_t info[] = { INFO_INIT };
 	int file_des = 2;
@@ -18,18 +18,18 @@ int main(int argc, char *argv[])
 			: "=r" (file_des)
 			: "r" (file_des));
 
-	if (argc == 2)
+	if (ac == 2)
 	{
-		file_des = open(argv[1], O_RDONLY);
+		file_des = open(av[1], O_RDONLY);
 		if (file_des == -1)
 		{
 			if (errno == EACCES)
 				exit(126);
 			if (errno == ENOENT)
 			{
-				my_eputs(argv[0]);
+				my_eputs(av[0]);
 				my_eputs(": 0: can't be opened ");
-				my_eputs(argv[1]);
+				my_eputs(av[1]);
 				my_eputchar('\n');
 				my_eputchar(BUF_FLUSH);
 				exit(127);
@@ -40,6 +40,6 @@ int main(int argc, char *argv[])
 	}
 	pop_envlist(info);
 	_readhistory(info);
-	hsh(info, argv);
+	hsh(info, av);
 	return (EXIT_SUCCESS);
 }
