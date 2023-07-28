@@ -22,7 +22,7 @@ int is_alphab(int ch)
 
 int _isinteractive(info_t *info)
 {
-	return (isatty(STDIN_FILENO) && info->readfd <= 2);
+	return (isatty(STDIN_FILENO) && info->fd_read <= 2);
 }
 
 /**

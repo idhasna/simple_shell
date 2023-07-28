@@ -40,7 +40,7 @@ int _unsetalias(info_t *info, char sttr)
 		return (1);
 	charc = *pos;
 	*pos = 0;
-	rtn = delete_node(&(info->als),
+	rtn = _delete_node(&(info->als),
 		node_index(info->als, prefix_node(info->als, sttr, -1)));
 	*pos = charc;
 	return (rtn);
@@ -65,7 +65,7 @@ int m_alias(info_t *info)
 		while (als_node)
 		{
 			write_alias(als_node);
-			als_node = als_node->next;
+			als_node = als_node->_next;
 		}
 		return (0);
 	}
@@ -75,7 +75,7 @@ int m_alias(info_t *info)
 		if (pos)
 			_setalias(info, info->argv[index]);
 		else
-			write_alias(prefix_node(info->alias, info->argv[index], '='));
+			write_alias(prefix_node(info->als, info->argv[index], '='));
 }
 	return (0);
 }
@@ -114,5 +114,5 @@ int _setalias(info_t *info, char *sttr)
 		return (_unsetalias(info, sttr));
 
 	_unsetalias(info, sttr);
-	return (_addnodeend(&(info->alias), sttr, 0) == NULL);
+	return (_addnodeend(&(info->als), sttr, 0) == NULL);
 }
