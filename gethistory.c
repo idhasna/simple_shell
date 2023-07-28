@@ -15,7 +15,7 @@ int list_history(info_t *info, char *buff, int line_count)
 
 	if (info->_history)
 		als_node = info->_history;
-	add_node_end(&als_node, buff, line_count);
+	_addnodeend(&als_node, buff, line_count);
 
 	if (!info->_history)
 		info->_history = als_node;
@@ -43,7 +43,7 @@ int print_history(info_t *info)
 		return (-1);
 	for (als_node = info->_history; als_node; als_node = als_node->_next)
 	{
-		_myputsfd(als_node->sttr, file_des);
+		my_putsfd(als_node->sttr, file_des);
 		_myputfd('\n', file_des);
 	}
 	_myputfd(BUF_FLUSH, file_des);

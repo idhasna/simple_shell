@@ -60,7 +60,7 @@ int hsh_loop(info_t *info, char **av)
 		_clearinfo(info);
 		if (_isinteractive(info))
 			_myputs("$ ");
-		_myeputchar(BUF_FLUSH);
+		my_eputchar(BUF_FLUSH);
 		result = _getinput(info);
 		if (result != -1)
 		{

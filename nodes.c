@@ -28,7 +28,7 @@ int _deletenode(list_t **first, unsigned int _index)
 	{
 		if (index == _index)
 		{
-			prev_node->next = als_node->_next;
+			prev_node->_next = als_node->_next;
 			free(als_node->sttr);
 			free(als_node);
 			return (1);
@@ -122,7 +122,7 @@ list_t *_addnode(list_t **first, const char *sttr, int numb)
 	_newfirst = malloc(sizeof(list_t));
 	if (!_newfirst)
 		return (NULL);
-	_memset((void *)_newfirst, 0, sizeof(list_t));
+	memset((void *)_newfirst, 0, sizeof(list_t));
 	_newfirst->numb = numb;
 	if (sttr)
 	{

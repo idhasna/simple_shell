@@ -79,7 +79,7 @@ char **split_str(char *sttr, char *delimeter)
 		while (_isdelime(sttr[index], delimeter))
 			index++;
 		y = 0;
-		while (!_isdelim(sttr[index + y], delimeter) && sttr[index + y])
+		while (!_isdelime(sttr[index + y], delimeter) && sttr[index + y])
 			y++;
 		str[x] = malloc((y + 1) * sizeof(char));
 		if (!str[x])
