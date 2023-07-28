@@ -44,23 +44,23 @@ char *copy_str(char *buf_dest, char *buf_src)
 
 /**
  * _myputchar - Prints the character to standard output .
- * @charc: The character to be printed .
+ * @c: The character to be printed .
  * Return: If success 1.
  * If error, -1 is returned, and errno is set appropriately.
  */
 
-int _myputchar(char charc)
+int _myputchar(char c)
 {
 	static int index;
 	static char buff[WRITE_BUF_SIZE];
 
-	if (charc == BUF_FLUSH || index >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || index >= WRITE_BUF_SIZE)
 	{
 		write(1, buff, index);
 		index = 0;
 	}
-	if (charc != BUF_FLUSH)
-		buff[index++] = charc;
+	if (c != BUF_FLUSH)
+		buff[index++] = c;
 	return (1);
 }
 

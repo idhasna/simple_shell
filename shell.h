@@ -212,7 +212,7 @@ int comp_str(char *, char *);
 /* sttr1.c */
 void _myputs(char *);
 char *copy_str(char *, char *);
-int _myputchar(char *);
+int _myputchar(char);
 char *dup_str(const char *);
 
 /* Token.c */
