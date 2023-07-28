@@ -114,5 +114,5 @@ int _set_alias(info_t *info, char *sttr)
 		return (_unsetalias(info, sttr));
 
 	_unsetalias(info, sttr);
-	return (_addnodeend(&(info->als), sttr, 0) == NULL);
+	return (add_node_end(&(info->als), sttr, 0) == NULL);
 }

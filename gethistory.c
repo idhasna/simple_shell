@@ -15,7 +15,7 @@ int list_history(info_t *info, char *buff, int line_count)
 
 	if (info->_history)
 		als_node = info->_history;
-	_addnodeend(&als_node, buff, line_count);
+	add_node_end(&als_node, buff, line_count);
 
 	if (!info->_history)
 		info->_history = als_node;

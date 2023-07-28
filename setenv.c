@@ -58,7 +58,7 @@ int pop_envlist(info_t *info)
 	size_t index;
 
 	for (index = 0; environ[index]; index++)
-		_addnodeend(&als_node, environ[index], 0);
+		add_node_end(&als_node, environ[index], 0);
 	info->env = als_node;
 	return (0);
 }
