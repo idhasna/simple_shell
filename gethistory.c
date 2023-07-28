@@ -121,7 +121,7 @@ int _readhistory(info_t *info)
 	buff = malloc(sizeof(char) * (filesize + 1));
 	if (!buff)
 		return (0);
-	rd_len = read(fd, buff, filesize);
+	rd_len = read(file_des, buff, filesize);
 	buff[filesize] = 0;
 	if (rd_len <= 0)
 		return (free(buff), 0);
