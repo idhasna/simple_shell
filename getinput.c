@@ -22,7 +22,7 @@ int get_line(info_t *info, char **pntr, size_t *_bufflength)
 	if (index == _bufflen)
 		index = _bufflen = 0;
 
-	result = _buffread(info, buff, &_bufflen);
+	result = buf_read(info, buff, &_bufflen);
 	if (result == -1 || (result == 0 && _bufflen == 0))
 		return (-1);
 
@@ -61,7 +61,7 @@ ssize_t _getinput(info_t *info)
 	char **_buffpos = &(info->arg), *pos;
 
 	_myputchar(BUF_FLUSH);
-	result = _buffinput(info, &buff, &_bufflen);
+	result = buf_input(info, &buff, &_bufflen);
 	if (result == -1) /* End Of File */
 		return (-1);
 	if (_bufflen) /* In the chain buffer, we've got commands left. */
@@ -93,12 +93,12 @@ ssize_t _getinput(info_t *info)
 }
 
 /**
- * _siginthandler - Handles the signit (ctrl-C) .
+ * sigin_thandler - Handles the signit (ctrl-C) .
  * @_signumb - The signal number .
  * Return: Void .
  */
 
-void _siginthandler(__attribute__((unused))int _signumb)
+void sigint_handler(__attribute__((unused))int _signumb)
 {
 	_myputs("\n");
 	_myputs("$ ");
@@ -106,13 +106,13 @@ void _siginthandler(__attribute__((unused))int _signumb)
 }
 
 /**
- * _buffinput - The buffers of chained commands .
+ * buf_input - The buffers of chained commands .
  * @_bufflen: The adress of the length .
  * @buff: The adress of the buffer .
  * @info: The structure of the parameter .
  */
 
-ssize_t _buffinput(info_t *info, char **buff, size_t *_bufflen)
+ssize_t buf_input(info_t *info, char **buff, size_t *_bufflen)
 {
 	ssize_t result = 0;
 	size_t _lenpos = 0;
@@ -121,7 +121,7 @@ ssize_t _buffinput(info_t *info, char **buff, size_t *_bufflen)
 	{
 		free(*buff);
 		*buff = NULL;
-		signal(SIGINT, _siginthandler);
+		signal(SIGINT, sigint_handler);
 #if USE_GETLINE
 		result = get_line(buff, &_lenpos, stdin);
 #else
@@ -147,13 +147,13 @@ ssize_t _buffinput(info_t *info, char **buff, size_t *_bufflen)
 }
 
 /**
- * _buffread - It reads the buffer .
+ * buf_read - It reads the buffer .
  * @buff: The buffer .
  * @info: The structure of the parameter .
  * @index: The size of buffers .
  */
 
-ssize_t _buffread(info_t *info, char *buff, size_t *index)
+ssize_t buf_read(info_t *info, char *buff, size_t *index)
 {
 	ssize_t result = 0;
 

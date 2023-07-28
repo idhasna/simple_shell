@@ -154,7 +154,7 @@ char *str_ch(char *, char);
 /* getinput.c */
 int get_line(info_t *, char **, size_t *);
 ssize_t _getinput(info_t *);
-void _siginthandler(int);
+void sigint_handler(int);
 
 /* getenviron.c */
 int unset_env(info_t *, char *);
