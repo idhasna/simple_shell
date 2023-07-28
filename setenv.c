@@ -37,7 +37,7 @@ char *get_env(info_t *info, const char *name)
 
 	while (als_node)
 	{
-		pos = begins_with(als_node->st, name);
+		pos = begins_with(als_node->sttr, name);
 		if (pos && *pos)
 			return (pos);
 		als_node = als_node->_next;

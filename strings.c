@@ -40,10 +40,10 @@ char *str_cnct(char *frst_str, char *scnd_str, int nb)
 		src_index++;
 	}
 	if (src_index < nb)
-		dest[dest_index] = '\0';
+		frst_str[dest_index] = '\0';
 	return (sttr);
 }
-
+i
 /**
  * str_cpy - It copies the string .
  * @nb: The number of characters to be copied .
@@ -60,7 +60,7 @@ char *str_cpy(char *frst_str, char *scnd_str, int nb)
 	dest_index = 0;
 	while (scnd_str[dest_index] != '\0' && dest_index < nb - 1)
 	{
-		frst[dest_index] = scnd_str[dest_index];
+		frst_str[dest_index] = scnd_str[dest_index];
 		dest_index++;
 	}
 	if (dest_index < nb)
