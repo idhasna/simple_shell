@@ -22,7 +22,7 @@ int get_line(info_t *info, char **pntr, size_t *_bufflength)
 	if (index == _bufflen)
 		index = _bufflen = 0;
 
-	result = read_buf(info, buff, &_bufflen);
+	result = buf_read(info, buff, &_bufflen);
 	if (result == -1 || (result == 0 && _bufflen == 0))
 		return (-1);
 
@@ -106,13 +106,13 @@ void sigint_handler(__attribute__((unused))int _signumb)
 }
 
 /**
- * input_buf - The buffers of chained commands .
+ * _inputbuf - The buffers of chained commands .
  * @_bufflen: The adress of the length .
  * @buff: The adress of the buffer .
  * @info: The structure of the parameter .
  */
 
-ssize_t input_buf(info_t *info, char **buff, size_t *_bufflen)
+ssize_t _inputbuf(info_t *info, char **buff, size_t *_bufflen)
 {
 	ssize_t result = 0;
 	size_t _lenpos = 0;
@@ -147,13 +147,13 @@ ssize_t input_buf(info_t *info, char **buff, size_t *_bufflen)
 }
 
 /**
- * read_buf - It reads the buffer .
+ * buf_read - It reads the buffer .
  * @buff: The buffer .
  * @info: The structure of the parameter .
  * @index: The size of buffers .
  */
 
-ssize_t read_buf(info_t *info, char *buff, size_t *index)
+ssize_t buf_read(info_t *info, char *buff, size_t *index)
 {
 	ssize_t result = 0;
 
